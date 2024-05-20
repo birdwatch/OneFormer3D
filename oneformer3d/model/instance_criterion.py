@@ -156,7 +156,7 @@ class InstanceCriterion:
                 indices.append(self.matcher(pred_instances, gt_instances))
 
         cls_losses = []
-        for cls_pred, inst, (idx_q, idx_gt) in zip(cls_preds, insts, indices, strict=False):
+        for cls_pred, inst, (idx_q, idx_gt) in zip(cls_preds, insts, indices):
             n_classes = cls_pred.shape[1] - 1
             cls_target = cls_pred.new_full(
                 (len(cls_pred),), n_classes, dtype=torch.long)
@@ -168,7 +168,7 @@ class InstanceCriterion:
         # 3 other losses
         score_losses, mask_bce_losses, mask_dice_losses = [], [], []
         for mask, score, inst, (idx_q, idx_gt) in zip(pred_masks, pred_scores,
-                                                      insts, indices, strict=False):
+                                                      insts, indices):
             if len(inst) == 0:
                 continue
 
@@ -261,7 +261,7 @@ class InstanceCriterion:
 
         # class loss
         cls_losses = []
-        for cls_pred, inst, (idx_q, idx_gt) in zip(cls_preds, insts, indices, strict=False):
+        for cls_pred, inst, (idx_q, idx_gt) in zip(cls_preds, insts, indices):
             n_classes = cls_pred.shape[1] - 1
             cls_target = cls_pred.new_full(
                 (len(cls_pred),), n_classes, dtype=torch.long)
@@ -273,7 +273,7 @@ class InstanceCriterion:
         # 3 other losses
         score_losses, mask_bce_losses, mask_dice_losses = [], [], []
         for mask, score, inst, (idx_q, idx_gt) in zip(pred_masks, pred_scores,
-                                                      insts, indices, strict=False):
+                                                      insts, indices):
             if len(inst) == 0:
                 continue
             pred_mask = mask[idx_q]
@@ -562,7 +562,7 @@ class OneDataCriterion:
                 indices.append(self.matcher(pred_instances, gt_instances))
 
         cls_losses = []
-        for cls_pred, inst, (idx_q, idx_gt) in zip(cls_preds, insts, indices, strict=False):
+        for cls_pred, inst, (idx_q, idx_gt) in zip(cls_preds, insts, indices):
             n_classes = cls_pred.shape[1] - 1
             cls_target = cls_pred.new_full(
                 (len(cls_pred),), n_classes, dtype=torch.long)
@@ -584,7 +584,7 @@ class OneDataCriterion:
         # 3 other losses
         score_losses, mask_bce_losses, mask_dice_losses = [], [], []
         for mask, score, inst, (idx_q, idx_gt) in zip(
-            pred_masks, pred_scores, insts, indices, strict=False):
+            pred_masks, pred_scores, insts, indices):
             if len(inst) == 0:
                 continue
 
@@ -654,7 +654,7 @@ class OneDataCriterion:
 
         # class loss
         cls_losses = []
-        for cls_pred, inst, (idx_q, idx_gt) in zip(cls_preds, insts, indices, strict=False):
+        for cls_pred, inst, (idx_q, idx_gt) in zip(cls_preds, insts, indices):
             n_classes = cls_pred.shape[1] - 1
             cls_target = cls_pred.new_full(
                 (len(cls_pred),), n_classes, dtype=torch.long)
@@ -676,7 +676,7 @@ class OneDataCriterion:
         # 3 other losses
         score_losses, mask_bce_losses, mask_dice_losses = [], [], []
         for mask, score, inst, (idx_q, idx_gt) in zip(pred_masks, pred_scores,
-                                                      insts, indices, strict=False):
+                                                      insts, indices):
             if len(inst) == 0:
                 continue
             pred_mask = mask[idx_q]

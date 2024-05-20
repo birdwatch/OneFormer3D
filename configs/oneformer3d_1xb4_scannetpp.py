@@ -1866,7 +1866,7 @@ test_pipeline = [
 # run settings
 train_dataloader = dict(
     batch_size=1,
-    num_workers=0,
+    num_workers=1,
     dataset=dict(
         type=dataset_type,
         ann_file="scannetpp_oneformer3d_infos_train.pkl",

@@ -34,5 +34,3 @@ class ScanNetPPSegDataset(ScanNetSegDataset_):
     def __getitem__(self, idx: int) -> dict:
         print("ScanNetPPSegDataset.__getitem__")
         return super().__getitem__(idx)
-    
-    def __

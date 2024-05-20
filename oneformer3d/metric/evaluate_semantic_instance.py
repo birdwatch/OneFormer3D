@@ -29,7 +29,7 @@ def evaluate_matches(matches, class_labels, options):
     pr_rc = np.zeros((2, len(class_labels), len(overlaps)),
                   float)
     for di, (min_region_size, distance_thresh, distance_conf) in enumerate(
-            zip(min_region_sizes, dist_threshes, dist_confs, strict=False)):
+            zip(min_region_sizes, dist_threshes, dist_confs)):
         for oi, overlap_th in enumerate(overlaps):
             pred_visited = {}
             for m in matches:
@@ -332,7 +332,7 @@ def scannet_eval(preds, gts, options, valid_class_ids, class_labels,
     """
     options = get_options(options)
     matches = {}
-    for i, (pred, gt) in enumerate(zip(preds, gts, strict=False)):
+    for i, (pred, gt) in enumerate(zip(preds, gts)):
         matches_key = i
         # assign gt to predictions
         gt2pred, pred2gt = assign_instances_for_scan(pred, gt, options,

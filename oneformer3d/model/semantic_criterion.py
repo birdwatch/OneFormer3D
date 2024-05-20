@@ -31,7 +31,7 @@ class ScanNetSemanticCriterion:
             Dict: with semantic loss value.
         """
         losses = []
-        for pred_mask, gt_mask in zip(pred["sem_preds"], insts, strict=False):
+        for pred_mask, gt_mask in zip(pred["sem_preds"], insts):
             if self.ignore_index >= 0:
                 pred_mask = pred_mask[:, :-1]
             losses.append(F.cross_entropy(
@@ -75,7 +75,7 @@ class S3DISSemanticCriterion:
         """
         pred_masks = aux_outputs["masks"]
         seg_losses = []
-        for pred_mask, gt_mask in zip(pred_masks, insts, strict=False):
+        for pred_mask, gt_mask in zip(pred_masks, insts):
             seg_loss = self.seg_loss(
                 pred_mask.T, gt_mask.sp_masks.float().argmax(0))
             seg_losses.append(seg_loss)
@@ -99,7 +99,7 @@ class S3DISSemanticCriterion:
         """
         pred_masks = pred["masks"]
         seg_losses = []
-        for pred_mask, gt_mask in zip(pred_masks, insts, strict=False):
+        for pred_mask, gt_mask in zip(pred_masks, insts):
             seg_loss = self.seg_loss(
                 pred_mask.T, gt_mask.sp_masks.float().argmax(0))
             seg_losses.append(seg_loss)

@@ -13,3 +13,4 @@ data/scannetpp/splits/
 data/scannetpp_converted/
 data/scannetpp_mmdet/
 data/scannetpp_test/
+.python-version

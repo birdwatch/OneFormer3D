@@ -25,7 +25,7 @@ def aggregate_predictions(masks, labels, scores, valid_class_ids):
         list[dict]: Per scene aggregated predictions.
     """
     infos = []
-    for id, (mask, label, score) in enumerate(zip(masks, labels, scores, strict=False)):
+    for id, (mask, label, score) in enumerate(zip(masks, labels, scores)):
         mask = mask.numpy()
         label = label.numpy()
         score = score.numpy()
@@ -57,7 +57,7 @@ def rename_gt(gt_semantic_masks, gt_instance_masks, valid_class_ids):
     """
     renamed_instance_masks = []
     for semantic_mask, instance_mask in zip(gt_semantic_masks,
-                                            gt_instance_masks, strict=False):
+                                            gt_instance_masks):
         unique = np.unique(instance_mask)
         assert len(unique) < 1000
         for i in unique:

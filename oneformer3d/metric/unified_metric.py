@@ -168,7 +168,7 @@ class UnifiedSegMetric(SegMetric):
                 logger=logger)
 
         metrics = dict()
-        for ret, keys in zip((ret_sem, ret_inst, ret_pan), self.logger_keys, strict=False):
+        for ret, keys in zip((ret_sem, ret_inst, ret_pan), self.logger_keys):
             for key in keys:
                 metrics[key] = ret[key]
         return metrics

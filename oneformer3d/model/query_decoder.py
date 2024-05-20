@@ -316,7 +316,7 @@ class QueryDecoder(BaseModule):
         aux_outputs = [
             {"cls_preds": cls_pred, "masks": masks, "scores": scores}
             for cls_pred, scores, masks in zip(
-                cls_preds[:-1], pred_scores[:-1], pred_masks[:-1], strict=False)]
+                cls_preds[:-1], pred_scores[:-1], pred_masks[:-1])]
         return dict(
             cls_preds=cls_preds[-1],
             masks=pred_masks[-1],
@@ -472,7 +472,7 @@ class ScanNetQueryDecoder(QueryDecoder):
                 scores=scores)
             for cls_pred, sem_pred, scores, masks in zip(
                 cls_preds[:-1], sem_preds[:-1],
-                pred_scores[:-1], pred_masks[:-1], strict=False)]
+                pred_scores[:-1], pred_masks[:-1])]
         return dict(
             cls_preds=cls_preds[-1],
             sem_preds=sem_preds[-1],
@@ -692,7 +692,7 @@ class OneDataQueryDecoder(BaseModule):
         aux_outputs = [
             {"cls_preds": cls_pred, "masks": masks, "scores": scores}
             for cls_pred, scores, masks in zip(
-                cls_preds[:-1], pred_scores[:-1], pred_masks[:-1], strict=False)]
+                cls_preds[:-1], pred_scores[:-1], pred_masks[:-1])]
         return dict(
             cls_preds=cls_preds[-1],
             masks=pred_masks[-1],

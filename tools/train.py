@@ -13,6 +13,9 @@ from mmengine.runner import Runner
 sys.path.append(
     os.path.abspath(os.path.join(os.path.dirname(__file__), os.path.pardir))
 )
+sys.path.append(
+    os.path.abspath(os.path.join(os.path.dirname(__file__), os.path.pardir, "oneformer3d"))
+)
 from mmdet3d.utils import replace_ceph_backend
 
 # from oneformer3d import Oneformer3D  # noqa: E402

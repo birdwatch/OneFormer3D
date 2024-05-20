@@ -172,7 +172,7 @@ class ScanNetOneFormer3DMixin:
         things_sem_mask = labels[idxs] + n_stuff_classes
 
         inst_idxs, num_pts = things_inst_mask.unique(return_counts=True)
-        for inst, pts in zip(inst_idxs, num_pts, strict=False):
+        for inst, pts in zip(inst_idxs, num_pts):
             if pts <= self.test_cfg.npoint_thr and inst != 0:
                 things_inst_mask[things_inst_mask == inst] = 0
 
@@ -340,7 +340,7 @@ class ScanNetOneFormer3D(ScanNetOneFormer3DMixin, Base3DDetector):
                         (el_p - el_p.min(0)[0]),
                         torch.hstack((p[:, 3:], p[:, :3] - p[:, :3].mean(0))),
                     )
-                    for el_p, p in zip(elastic_points, points, strict=False)
+                    for el_p, p in zip(elastic_points, points)
                 ],
             )
 
@@ -689,7 +689,7 @@ class ScanNetPlusPlusOneFormer3D(ScanNetOneFormer3DMixin, Base3DDetector):
             features.append(batch_inputs_dict["points"][i][:, 3:])
 
         coordinates, features = ME.utils.batch_sparse_collate(
-            [(c / self.voxel_size, f) for c, f in zip(coordinates, features, strict=False)],
+            [(c / self.voxel_size, f) for c, f in zip(coordinates, features)],
             device=coordinates[0].device,
         )
         field = ME.TensorField(coordinates=coordinates, features=features)
@@ -885,7 +885,7 @@ class S3DISOneFormer3D(Base3DDetector):
                         (el_p - el_p.min(0)[0]),
                         torch.hstack((p[:, 3:], p[:, :3] - p[:, :3].mean(0))),
                     )
-                    for el_p, p in zip(elastic_points, points, strict=False)
+                    for el_p, p in zip(elastic_points, points)
                 ],
             )
 
@@ -1164,7 +1164,7 @@ class S3DISOneFormer3D(Base3DDetector):
         things_sem_mask = labels[idxs]
 
         inst_idxs, num_pts = things_inst_mask.unique(return_counts=True)
-        for inst, pts in zip(inst_idxs, num_pts, strict=False):
+        for inst, pts in zip(inst_idxs, num_pts):
             if pts <= self.test_cfg.npoint_thr and inst != 0:
                 things_inst_mask[things_inst_mask == inst] = 0
 
@@ -1354,7 +1354,7 @@ class InstanceOnlyOneFormer3D(Base3DDetector):
                         (el_p - el_p.min(0)[0]),
                         torch.hstack((p[:, 3:], p[:, :3] - p[:, :3].mean(0))),
                     )
-                    for el_p, p in zip(elastic_points, points, strict=False)
+                    for el_p, p in zip(elastic_points, points)
                 ],
             )
 

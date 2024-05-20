@@ -49,7 +49,7 @@ class Det3DDataPreprocessor_(Det3DDataPreprocessor):
                 # is then used for the transformer_head.
                 batch_input_shape = tuple(imgs[0].size()[-2:])
                 for data_sample, pad_shape in zip(data_samples,
-                                                  batch_pad_shape, strict=False):
+                                                  batch_pad_shape):
                     data_sample.set_metainfo({
                         "batch_input_shape": batch_input_shape,
                         "pad_shape": pad_shape,

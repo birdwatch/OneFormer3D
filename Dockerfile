@@ -18,9 +18,8 @@ RUN pip install mmcv==2.0.0 -f https://download.openmmlab.com/mmcv/dist/cu116/to
 RUN apt-get update \
     && apt-get -y install libopenblas-dev nvidia-cuda-dev
 RUN TORCH_CUDA_ARCH_LIST="6.1 7.0 8.6" \
-    pip install git+https://github.com/NVIDIA/MinkowskiEngine.git@02fc608bea4c0549b0a7b00ca1bf15dee4a0b228 -v --no-deps \
-    --install-option="--blas=openblas" \
-    --install-option="--force_cuda"
+    pip install -e git+https://github.com/NVIDIA/MinkowskiEngine.git@02fc608bea4c0549b0a7b00ca1bf15dee4a0b228 -v --no-deps \
+    --install-option="--blas=openblas" --install-option="--force_cuda"
 
 # Install torch-scatter 
 RUN pip install torch-scatter==2.1.2 -f https://data.pyg.org/whl/torch-1.13.0+cu116.html --no-deps
@@ -76,7 +75,7 @@ RUN pip install --no-deps \
     cachetools==5.3.0 \
     nuscenes-devkit==1.1.10 \
     trimesh==3.21.6 \
-    open3d==0.17.0 \
+    open3d==0.18.0 \
     plotly==5.18.0 \
     dash==2.14.2 \
     plyfile==1.0.2 \
@@ -86,4 +85,8 @@ RUN pip install --no-deps \
     blinker==1.7.0 \
     itsdangerous==2.1.2 \
     importlib_metadata==2.1.2 \
-    zipp==3.17.0
+    zipp==3.17.0\
+    pyyaml==6.0.1\
+    tqdm==4.66.2\
+    pytz==2024.1\
+    six==1.16.0
