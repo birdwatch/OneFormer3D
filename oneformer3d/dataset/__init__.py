@@ -1,0 +1,4 @@
+from .s3dis_dataset import S3DISSegDataset_
+from .scannet_dataset import ScanNet200SegDataset_, ScanNetSegDataset_
+from .scannetpp_dataset import ScanNetPPSegDataset
+from .structured3d_dataset import ConcatDataset_, Structured3DSegDataset

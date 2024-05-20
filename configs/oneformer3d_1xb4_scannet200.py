@@ -231,8 +231,6 @@ train_dataloader = dict(
         data_prefix=data_prefix,
         metainfo=dict(classes=class_names),
         pipeline=train_pipeline,
-        ignore_index=num_semantic_classes,
-        scene_idxs=None,
         test_mode=False))
 val_dataloader = dict(
     dataset=dict(
@@ -242,7 +240,6 @@ val_dataloader = dict(
         data_prefix=data_prefix,
         metainfo=dict(classes=class_names),
         pipeline=test_pipeline,
-        ignore_index=num_semantic_classes,
         test_mode=True))
 test_dataloader = val_dataloader
 
