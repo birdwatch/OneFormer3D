@@ -1,4 +1,5 @@
-FROM pytorch/pytorch:1.13.1-cuda11.6-cudnn8-devel
+# FROM pytorch/pytorch:1.13.1-cuda11.6-cudnn8-devel
+FROM pytorch/pytorch:2.0.1-cuda11.8-cudnn8-devel
 
 RUN apt-key adv --fetch-keys https://developer.download.nvidia.com/compute/cuda/repos/ubuntu1804/x86_64/3bf863cc.pub \
     && apt-key adv --fetch-keys https://developer.download.nvidia.com/compute/machine-learning/repos/ubuntu1804/x86_64/7fa2af80.pub \
@@ -9,20 +10,26 @@ RUN apt-key adv --fetch-keys https://developer.download.nvidia.com/compute/cuda/
 RUN pip install --no-deps \
     mmengine==0.7.3 \
     mmdet==3.0.0 \
-    mmsegmentation==1.0.0 \
-    git+https://github.com/open-mmlab/mmdetection3d.git@22aaa47fdb53ce1870ff92cb7e3f96ae38d17f61
-RUN pip install mmcv==2.0.0 -f https://download.openmmlab.com/mmcv/dist/cu116/torch1.13.0/index.html --no-deps
+    mmsegmentation==1.0.0
+RUN pip install -e git+https://github.com/open-mmlab/mmdetection3d.git@22aaa47fdb53ce1870ff92cb7e3f96ae38d17f61 --no-deps
+RUN pip install mmcv==2.0.0 -f https://download.openmmlab.com/mmcv/dist/cu118/torch2.0/index.html --no-deps
 
 # Install MinkowskiEngine
 # Feel free to skip nvidia-cuda-dev if minkowski installation is fine
 RUN apt-get update \
-    && apt-get -y install libopenblas-dev nvidia-cuda-dev
-RUN TORCH_CUDA_ARCH_LIST="6.1 7.0 8.6" \
-    pip install -e git+https://github.com/NVIDIA/MinkowskiEngine.git@02fc608bea4c0549b0a7b00ca1bf15dee4a0b228 -v --no-deps \
-    --install-option="--blas=openblas" --install-option="--force_cuda"
+    && apt-get -y install libopenblas-dev
+# RUN TORCH_CUDA_ARCH_LIST="6.1 7.0 8.6" \
+#     pip install git+https://github.com/NVIDIA/MinkowskiEngine.git@02fc608bea4c0549b0a7b00ca1bf15dee4a0b228 -v --no-deps \
+#     --install-option="--blas=openblas" \
+#     --install-option="--force_cuda"
+RUN git clone https://github.com/NVIDIA/MinkowskiEngine.git \
+    && cd MinkowskiEngine \
+    && git reset --hard 02fc608bea4c0549b0a7b00ca1bf15dee4a0b228 \
+    && python setup.py install --blas=openblas --force_cuda \
+    && cd ..
 
 # Install torch-scatter 
-RUN pip install torch-scatter==2.1.2 -f https://data.pyg.org/whl/torch-1.13.0+cu116.html --no-deps
+RUN pip install torch-scatter==2.1.2 -f https://data.pyg.org/whl/torch-2.0.1+cu118.html --no-deps
 
 # Install ScanNet superpoint segmentator
 RUN git clone https://github.com/Karbo123/segmentator.git \
@@ -75,7 +82,7 @@ RUN pip install --no-deps \
     cachetools==5.3.0 \
     nuscenes-devkit==1.1.10 \
     trimesh==3.21.6 \
-    open3d==0.18.0 \
+    open3d==0.17.0 \
     plotly==5.18.0 \
     dash==2.14.2 \
     plyfile==1.0.2 \
@@ -85,8 +92,4 @@ RUN pip install --no-deps \
     blinker==1.7.0 \
     itsdangerous==2.1.2 \
     importlib_metadata==2.1.2 \
-    zipp==3.17.0\
-    pyyaml==6.0.1\
-    tqdm==4.66.2\
-    pytz==2024.1\
-    six==1.16.0
+    zipp==3.17.0
